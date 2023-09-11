@@ -1,17 +1,17 @@
-const currentDay = document.getElementById("current-day")
+const currentDayOfWeek = document.querySelector('[data-testid="currentDayOfTheWeek"]')
+const displayTime = document.querySelector('[data-testid="currentUTCTime"]');
+
+const utcDay = new Date().getDay();
+
 const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
-const utcTime = new Date().getDay();
-const myCurrentday = days[utcTime]
+const myCurrentday = days[utcDay]
 console.log("Current Day:", myCurrentday);
-currentDay.innerText = `Current week: ${myCurrentday}`;
+currentDayOfWeek.innerText = `Current day: ${myCurrentday}`;
 
 function Time() {
-    let displayTime = document.getElementById("display-time")
-    const utcTime = new Date();
-
-
-displayTime.innerText = utcTime.toLocaleTimeString()
+    const utcTime = new Date().getTime();
+    displayTime.innerText = utcTime
 }
 
 Time()

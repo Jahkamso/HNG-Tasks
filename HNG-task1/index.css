@@ -19,12 +19,9 @@ body {
   align-items: center;
   gap: 40px;
 }
-.wrapper .image-outline {
+.wrapper img {
   width: 150px;
   height: 150px;
-  background: url(pic.jpg);
-  background-size: cover;
-  background-position: center;
   border-radius: 50%;
   border: 5px solid #64CCC5;
 }
