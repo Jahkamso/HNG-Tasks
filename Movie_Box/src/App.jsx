@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [movie, setMovie] = useState({ results: [] });
+
+  const URL =
+    'https://api.themoviedb.org/3/movie/popular?api_key=b83b77e3babdd0858c05f876555ba54e';
+
+  useEffect(() => {
+    
+      fetch(URL)
+        .then((response) => response.json())
+        .then((data) => setMovie({ results: data.results.slice(0, 12) }));
+  }, [])
+
+  console.log(movie)
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="movie-section">
+        <h1>Featured Movie</h1>
+        <div className="movie">
+          {movie.results.map((movieItem) => (
+            <>
+              <div key={movie.id} className="movie-list">
+                <img
+                  src={`https://image.tmdb.org/t/p/original/${movieItem.poster_path}`}
+                  alt=""
+                  />
+                <div className="movie-briefing">
+                  <h4>{new Date(movieItem.release_date).getFullYear()}</h4>
+                  <h2>
+                    {movieItem.title.length > 15
+                      ? movieItem.title.slice(0, 15) + '...'
+                      : movieItem.title}
+                  </h2>
+                </div>
+              </div>
+            </>
+          ))}
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
 export default App
