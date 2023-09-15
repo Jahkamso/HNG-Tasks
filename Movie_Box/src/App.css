@@ -68,7 +68,29 @@
   border-radius: 50%;
 }
 .hero-container .hero-content{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 404px;
   padding-top: 93px;
+  color: white;
+}
+.hero-container .hero-content .btn{
+  display: flex;
+padding: 10px 16px;
+align-items: center;
+gap: 8px;
+background: var(--rose-700, #BE123C);
+border-radius: 6px;
+width: 170px;
+}
+.hero-container .hero-content .btn button{
+  background: none;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
 }
 .hero-container .hero-content h1{
   font-size: 48px;
@@ -80,6 +102,13 @@
   /* padding: 20px 98px; */
   /* background-color: red; */
 }
+.heart-icon{
+  width: 20px;
+  height: 19.474px;
+  position: absolute;
+  top: 10px;
+  right: 0;
+}
 .movie-section h1 {
   margin-bottom: 44px;
 }
@@ -90,6 +119,7 @@
   gap: 80px;
 }
 .movie-section .movie-cards {
+  /* position: relative; */
   width: 250px;
   height: 370px;
   /* padding-bottom: 30px; */
