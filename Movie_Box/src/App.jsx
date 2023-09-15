@@ -1,48 +1,52 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+import { useEffect, useState } from 'react';
+import './App.css';
+import Home from './Home';
+import Test from './components/test';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   const [movie, setMovie] = useState({ results: [] });
+  const [movieDetails, setMovieDetails] = useState([]);
+
+  const movieSelect = async (id) => {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=b83b77e3babdd0858c05f876555ba54e`
+    );
+    const data = await response.json();
+    setMovieDetails(data);
+    console.log(data);
+  };
 
   const URL =
-    'https://api.themoviedb.org/3/movie/popular?api_key=b83b77e3babdd0858c05f876555ba54e';
+    'https://api.themoviedb.org/3/movie/top_rated?api_key=b83b77e3babdd0858c05f876555ba54e';
 
   useEffect(() => {
-    
-      fetch(URL)
-        .then((response) => response.json())
-        .then((data) => setMovie({ results: data.results.slice(0, 12) }));
-  }, [])
-
-  console.log(movie)
+    fetch(URL)
+      .then((response) => response.json())
+      .then((data) => setMovie({ results: data.results.slice(0, 12) }));
+  }, []);
 
   return (
     <>
-      <div className="movie-section">
-        <h1>Featured Movie</h1>
-        <div className="movie">
-          {movie.results.map((movieItem) => (
-            <>
-              <div key={movie.id} className="movie-list">
-                <img
-                  src={`https://image.tmdb.org/t/p/original/${movieItem.poster_path}`}
-                  alt=""
-                  />
-                <div className="movie-briefing">
-                  <h4>{new Date(movieItem.release_date).getFullYear()}</h4>
-                  <h2>
-                    {movieItem.title.length > 15
-                      ? movieItem.title.slice(0, 15) + '...'
-                      : movieItem.title}
-                  </h2>
-                </div>
-              </div>
-            </>
-          ))}
-        </div>
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                movie={movie}
+                movieDetails={movieDetails}
+                movieSelect={movieSelect}
+              />
+            }
+          ></Route>
+          <Route path="/test" element={<Test movieDetails={movieDetails} />}></Route>
+        </Routes>
+      </BrowserRouter>
+      {/* <Hero /> */}
+      {/* <MovieCard movie={movie} movieDetails={movieDetails} movieSelect={movieSelect} /> */}
     </>
   );
 }
 
-export default App
+export default App;
