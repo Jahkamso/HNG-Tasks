@@ -31,7 +31,7 @@ const MovieCard = ({ movie, movieDetails, movieSelect }) => {
                   src={`https://image.tmdb.org/t/p/original/${movieItem.poster_path}`}
                   alt=""
                 />
-                <img className="heart-icon" src="/heart.svg" alt="" />
+                {/* <img className="heart-icon" src="/heart.svg" alt="" /> */}
                 <div className="movie-briefing">
                   <h4 data-testid="movie-release-date">
                     {new Date(movieItem.release_date).getFullYear()}
