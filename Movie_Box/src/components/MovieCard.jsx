@@ -34,7 +34,7 @@ const MovieCard = ({ movie, movieDetails, movieSelect }) => {
                 {/* <img className="heart-icon" src="/heart.svg" alt="" /> */}
                 <div className="movie-briefing">
                   <h4 data-testid="movie-release-date">
-                    {new Date(movieItem.release_date).getFullYear()}
+                    {new Date(movieItem.release_date).toUTCString().slice(0, 17)}
                   </h4>
                   <h2 data-testid="movie-title">
                     {movieItem.title}
